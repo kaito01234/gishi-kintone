@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-body">
+    <section class="templates-section">
+      <div class="section-header">
+        <h2>テンプレート</h2>
+        <button id="add-template" class="btn btn-primary btn-sm">+ 追加</button>
+      </div>
+
+      <div id="template-list"></div>
+
+      <div class="save-bar">
+        <span id="save-hint" class="save-hint"></span>
+        <button id="save-btn" class="btn btn-success btn-sm" disabled>保存</button>
+      </div>
+    </section>
+  </div>
+
+  <template id="template-item-tmpl">
+    <div class="template-item" data-index="">
+      <div class="template-header">
+        <input type="text" class="template-name" placeholder="テンプレート名">
+        <button class="btn btn-danger btn-xs delete-btn">削除</button>
+      </div>
+      <textarea class="template-body" rows="5" placeholder="テンプレート本文&#10;{{フィールド名}} で変数を埋め込めます"></textarea>
+      <div class="insert-toolbar">
+        <button type="button" class="btn btn-outline btn-xs insert-field-btn">+ フィールド</button>
+        <button type="button" class="btn btn-outline btn-xs insert-mention-btn">+ メンション</button>
+      </div>
+    </div>
+  </template>
+
+  <div id="picker-overlay" class="picker-overlay" hidden>
+    <div class="picker-dialog">
+      <div class="picker-header">
+        <span class="picker-title"></span>
+        <button type="button" class="btn btn-xs picker-close-btn">&times;</button>
+      </div>
+      <input type="text" class="picker-search" placeholder="検索...">
+      <div class="picker-list"></div>
+      <div class="picker-status"></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

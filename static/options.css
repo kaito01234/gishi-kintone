@@ -1,0 +1,300 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: メイリオ, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  background: #d4d7d7;
+  color: #333;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* ============================
+   Header
+   ============================ */
+.page-header {
+  background: #fff;
+  border-bottom: 1px solid #d4d4d4;
+  padding: 12px 0;
+  margin-bottom: 24px;
+}
+
+.page-header .container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.page-header h1 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0;
+}
+
+/* ============================
+   Container
+   ============================ */
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.main-content {
+  padding-bottom: 32px;
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+/* ============================
+   Filters Section
+   ============================ */
+.filters-section {
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.filter-desc {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.filter-domain {
+  flex: 2;
+  padding: 4px 8px;
+  height: 40px;
+  font-size: 14px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+}
+
+.filter-appid {
+  flex: 1;
+  padding: 4px 8px;
+  height: 40px;
+  font-size: 14px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+}
+
+.filter-domain:focus,
+.filter-appid:focus {
+  outline: none;
+  border-color: #0064c8;
+}
+
+/* ============================
+   Templates Section
+   ============================ */
+.templates-section {
+  background: #fff;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.template-desc {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 16px;
+}
+
+.template-desc code {
+  background: #f8f8f8;
+  border: 1px solid #d4d4d4;
+  padding: 0 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #e74c3c;
+}
+
+.template-item {
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: #fff;
+}
+
+.template-item:hover {
+  border-color: #b0b0b0;
+}
+
+.template-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.template-name {
+  flex: 1;
+  padding: 4px 8px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+}
+.template-name:focus {
+  outline: none;
+  border-color: #0064c8;
+}
+
+.template-body {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 13px;
+  font-family: "Consolas", "Monaco", "Menlo", monospace;
+  line-height: 1.5;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background: #fff;
+  color: #333;
+  resize: vertical;
+}
+.template-body:focus {
+  outline: none;
+  border-color: #0064c8;
+}
+
+.empty-msg {
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  padding: 20px 0;
+}
+
+/* ============================
+   Section Header
+   ============================ */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  margin-bottom: 0;
+}
+
+/* ============================
+   Buttons (kintone native style)
+   ============================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #d4d4d4;
+  transition: background 0.15s;
+  line-height: 1;
+}
+
+.btn-primary {
+  background: #0064c8;
+  color: #fff;
+  border-color: #0064c8;
+}
+.btn-primary:hover {
+  background: #0054a8;
+}
+
+.btn-success {
+  background: #0064c8;
+  color: #fff;
+  border-color: #0064c8;
+}
+.btn-success:hover {
+  background: #0054a8;
+}
+.btn-success:disabled {
+  background: #d5d5d5;
+  border-color: #d4d4d4;
+  color: #999;
+  cursor: default;
+}
+
+.btn-danger {
+  background: #f8f8f8;
+  color: #e74c3c;
+  border-color: #d4d4d4;
+}
+.btn-danger:hover {
+  background: #fef2f2;
+  border-color: #e74c3c;
+}
+
+.btn-sm {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 12px;
+}
+
+/* ============================
+   Status
+   ============================ */
+.save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.save-hint {
+  font-size: 13px;
+  color: #e67e22;
+}
+
+.save-status {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0064c8;
+  color: #fff;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+}
+.save-status.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+

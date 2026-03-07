@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>gishi-kintone</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="page-header">
+    <div class="container">
+      <h1>設定</h1>
+    </div>
+  </div>
+
+  <div class="container main-content">
+    <section class="filters-section">
+      <div class="section-header">
+        <h2>対象アプリの制限</h2>
+        <button id="add-filter" class="btn btn-primary btn-sm">+ 追加</button>
+      </div>
+      <p class="filter-desc">登録すると指定したアプリのみにボタンが表示されます。</p>
+      <div id="filter-list"></div>
+    </section>
+
+    <section class="templates-section">
+      <div class="section-header">
+        <h2>テンプレート</h2>
+        <button id="add-template" class="btn btn-primary btn-sm">+ 追加</button>
+      </div>
+      <p class="template-desc">
+        <code>{{フィールド名}}</code> でフィールドの値を埋め込み<br>
+        <code>{{@ログイン名}}</code> でユーザーへのメンション<br>
+        <code>{{@org/組織コード}}</code> で組織へのメンション<br>
+        <code>{{@group/グループコード}}</code> でグループへのメンション
+      </p>
+      <div id="template-list"></div>
+    </section>
+
+    <div class="save-bar">
+      <span id="save-hint" class="save-hint"></span>
+      <button id="save-btn" class="btn btn-success" disabled>保存</button>
+    </div>
+  </div>
+
+  <template id="template-item-tmpl">
+    <div class="template-item" data-index="">
+      <div class="template-header">
+        <input type="text" class="template-name" placeholder="テンプレート名">
+        <button class="btn btn-danger btn-sm delete-template-btn">削除</button>
+      </div>
+      <textarea class="template-body" rows="10" placeholder="テンプレート本文&#10;{{フィールド名}} で変数を埋め込めます"></textarea>
+    </div>
+  </template>
+
+  <script src="options.js"></script>
+</body>
+</html>

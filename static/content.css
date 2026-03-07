@@ -1,0 +1,156 @@
+/* ============================
+   Trigger Button
+   ============================ */
+.ktc-trigger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: #0064c8;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.ktc-trigger-btn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* ============================
+   Modal Overlay & Container
+   ============================ */
+.ktc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.ktc-modal {
+  background: #fff;
+  border-radius: 4px;
+  width: 480px;
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid #d4d4d4;
+}
+
+/* ============================
+   Modal Body
+   ============================ */
+.ktc-modal-body {
+  padding: 16px;
+  overflow-y: auto;
+}
+
+/* ============================
+   Select (Dropdown)
+   ============================ */
+.ktc-select {
+  display: block;
+  width: 100%;
+  padding: 0 32px 0 10px;
+  height: 40px;
+  font-size: 14px;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 10px center;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.ktc-select:focus {
+  border-color: #0064c8;
+}
+
+/* ============================
+   Buttons (kintone native style)
+   ============================ */
+.ktc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  height: 40px;
+  font-size: 14px;
+  font-weight: 400;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ktc-btn-submit {
+  background: #0064c8;
+  color: #fff;
+  border-color: #0064c8;
+}
+.ktc-btn-submit:hover {
+  background: #0054a8;
+}
+
+.ktc-btn-normal {
+  background: #f8f8f8;
+  color: #0064c8;
+  border-color: #d4d4d4;
+}
+.ktc-btn-normal:hover {
+  background: #f0f0f0;
+}
+
+/* ============================
+   Preview / Actions / Status
+   ============================ */
+.ktc-preview {
+  background: #f8f8f8;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 14px;
+  font-family: メイリオ, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 280px;
+  overflow-y: auto;
+  margin-top: 12px;
+  color: #333;
+}
+
+.ktc-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.ktc-status {
+  font-size: 14px;
+}
+.ktc-status-success {
+  color: #27ae60;
+}
+.ktc-status-error {
+  color: #e74c3c;
+}
+
+.ktc-empty-msg {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}

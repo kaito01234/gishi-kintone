@@ -1,0 +1,17 @@
+{
+  "name": "gishi-kintone",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.mjs",
+    "build:dev": "node build.mjs --dev",
+    "typecheck": "tsc --noEmit",
+    "package": "npm run build && cd dist && zip -r ../gishi-kintone.zip ."
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.287",
+    "esbuild": "^0.24.0",
+    "sharp": "^0.34.5",
+    "typescript": "^5.7.0"
+  }
+}
