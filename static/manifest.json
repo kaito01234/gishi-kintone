@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "gishi-kintone",
   "version": "1.0.0",
-  "description": "kintoneのレコード詳細画面でテンプレートに基づいたテキストをコピーできる拡張機能",
+  "description": "kintoneのでテンプレートに基づいたテキストをコピーできる拡張機能",
   "permissions": [
     "storage",
     "activeTab"
