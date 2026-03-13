@@ -17,18 +17,24 @@ let templates: Template[] = [];
 let dirty = false;
 let autoSaveTimer: ReturnType<typeof setTimeout> | null = null;
 const AUTO_SAVE_DELAY = 1000;
+const dirtyIndices = new Set<number>();
 
 let statusTimer: ReturnType<typeof setTimeout> | null = null;
 
-function showStatus(msg: string): void {
-  const els = document.querySelectorAll<HTMLSpanElement>(".auto-save-status");
-  for (const el of els) {
+function showStatusFor(indices: Set<number>, msg: string): void {
+  const items = listEl.querySelectorAll<HTMLDivElement>(".template-item");
+  const targets: HTMLSpanElement[] = [];
+  for (const idx of indices) {
+    const el = items[idx]?.querySelector<HTMLSpanElement>(".auto-save-status");
+    if (el) targets.push(el);
+  }
+  for (const el of targets) {
     el.textContent = msg;
     el.classList.add("visible");
   }
   if (statusTimer) clearTimeout(statusTimer);
   statusTimer = setTimeout(() => {
-    for (const el of els) el.classList.remove("visible");
+    for (const el of targets) el.classList.remove("visible");
   }, 1500);
 }
 
@@ -37,16 +43,19 @@ function scheduleAutoSave(): void {
   autoSaveTimer = setTimeout(save, AUTO_SAVE_DELAY);
 }
 
-function markDirty(): void {
+function markDirty(index?: number): void {
   dirty = true;
+  if (index !== undefined) dirtyIndices.add(index);
   scheduleAutoSave();
 }
 
 function save(): void {
   if (!dirty) return;
+  const saved = new Set(dirtyIndices);
+  dirtyIndices.clear();
   chrome.storage.sync.set({ templates }, () => {
     dirty = false;
-    showStatus("保存済み");
+    showStatusFor(saved, "保存済み");
   });
 }
 
@@ -66,12 +75,12 @@ function createTemplateItem(data: Template, index: number): HTMLElement {
 
   nameInput.addEventListener("input", () => {
     templates[index].name = nameInput.value;
-    markDirty();
+    markDirty(index);
   });
 
   bodyTextarea.addEventListener("input", () => {
     templates[index].template = bodyTextarea.value;
-    markDirty();
+    markDirty(index);
   });
 
   deleteBtn.addEventListener("click", () => {
