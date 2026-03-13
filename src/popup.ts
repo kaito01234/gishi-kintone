@@ -120,17 +120,9 @@ addBtn.addEventListener("click", () => {
   items[items.length - 1]?.focus();
 });
 
-const defaultTemplates: Template[] = [
-  {
-    name: "サンプルテンプレート",
-    template:
-      "{{@org/営業部}} {{@tanaka.taro}}\n\nお疲れ様です。\n案件番号 {{レコード番号}} の件について、対応をお願いいたします。\n\n■ 会社名: {{会社名}}\n■ 担当者: {{担当者名}}\n■ ステータス: {{ステータス}}\n\n{{@group/プロジェクトA}} の皆様もご確認ください。\nよろしくお願いいたします。",
-  },
-];
-
 chrome.storage.sync.get({ templates: null }, (data) => {
   if (data.templates === null) {
-    templates = defaultTemplates;
+    templates = [];
     chrome.storage.sync.set({ templates });
   } else {
     templates = data.templates as Template[];
