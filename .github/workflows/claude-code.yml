@@ -8,7 +8,7 @@ jobs:
   claude:
     if: >
       github.event.label.name == 'claude' &&
-      contains(fromJSON(vars.CLAUDE_ALLOWED_USERS), github.actor)
+      contains(fromJSON(vars.CLAUDE_CODE_ALLOWED_USERS), github.actor)
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -21,7 +21,7 @@ jobs:
       - name: Run Claude Code
         uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           direct_prompt: |
             以下のIssueの内容に基づいてコード変更を行い、PRを作成してください。
 
