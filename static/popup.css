@@ -136,21 +136,6 @@ h2 {
   background: #0054a8;
 }
 
-.btn-success {
-  background: #0064c8;
-  color: #fff;
-  border-color: #0064c8;
-}
-.btn-success:hover {
-  background: #0054a8;
-}
-.btn-success:disabled {
-  background: #d5d5d5;
-  border-color: #d4d4d4;
-  color: #999;
-  cursor: default;
-}
-
 .btn-danger {
   background: #f8f8f8;
   color: #e74c3c;
@@ -171,38 +156,16 @@ h2 {
   padding: 20px 0;
 }
 
-.save-bar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid #d4d4d4;
-}
-
-.save-hint {
-  font-size: 12px;
-  color: #e67e22;
-}
-
-.save-status {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  background: #0064c8;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 14px;
+.auto-save-status {
+  margin-left: auto;
+  font-size: 11px;
+  color: #999;
   opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.3s;
   pointer-events: none;
 }
-.save-status.visible {
+.auto-save-status.visible {
   opacity: 1;
-  transform: translateY(0);
 }
 
 /* ============================
@@ -210,6 +173,7 @@ h2 {
    ============================ */
 .insert-toolbar {
   display: flex;
+  align-items: center;
   gap: 4px;
   margin-top: 4px;
 }

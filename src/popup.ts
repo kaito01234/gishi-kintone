@@ -1,6 +1,6 @@
 /**
  * popup.ts
- * ポップアップ: テンプレート管理（CRUD、手動保存）
+ * ポップアップ: テンプレート管理（CRUD、自動保存）
  */
 import type { Template } from "./types";
 import { openFieldPicker, openMentionPicker } from "./picker";
@@ -9,44 +9,45 @@ import { openFieldPicker, openMentionPicker } from "./picker";
 
 const listEl = document.getElementById("template-list")!;
 const addBtn = document.getElementById("add-template")!;
-const saveBtn = document.getElementById("save-btn") as HTMLButtonElement;
-const saveHint = document.getElementById("save-hint")!;
 const tmpl = document.getElementById(
   "template-item-tmpl",
 ) as HTMLTemplateElement;
 
 let templates: Template[] = [];
 let dirty = false;
+let autoSaveTimer: ReturnType<typeof setTimeout> | null = null;
+const AUTO_SAVE_DELAY = 1000;
+
+let statusTimer: ReturnType<typeof setTimeout> | null = null;
+
+function showStatus(msg: string): void {
+  const els = document.querySelectorAll<HTMLSpanElement>(".auto-save-status");
+  for (const el of els) {
+    el.textContent = msg;
+    el.classList.add("visible");
+  }
+  if (statusTimer) clearTimeout(statusTimer);
+  statusTimer = setTimeout(() => {
+    for (const el of els) el.classList.remove("visible");
+  }, 1500);
+}
+
+function scheduleAutoSave(): void {
+  if (autoSaveTimer) clearTimeout(autoSaveTimer);
+  autoSaveTimer = setTimeout(save, AUTO_SAVE_DELAY);
+}
 
 function markDirty(): void {
   dirty = true;
-  saveBtn.disabled = false;
-  saveHint.textContent = "未保存";
-}
-
-function markClean(): void {
-  dirty = false;
-  saveBtn.disabled = true;
-  saveHint.textContent = "";
+  scheduleAutoSave();
 }
 
 function save(): void {
+  if (!dirty) return;
   chrome.storage.sync.set({ templates }, () => {
-    markClean();
-    showStatus("保存しました");
+    dirty = false;
+    showStatus("保存済み");
   });
-}
-
-function showStatus(msg: string): void {
-  let status = document.querySelector(".save-status") as HTMLDivElement | null;
-  if (!status) {
-    status = document.createElement("div");
-    status.className = "save-status";
-    document.body.appendChild(status);
-  }
-  status.textContent = msg;
-  status.classList.add("visible");
-  setTimeout(() => status!.classList.remove("visible"), 1500);
 }
 
 function createTemplateItem(data: Template, index: number): HTMLElement {
@@ -76,6 +77,7 @@ function createTemplateItem(data: Template, index: number): HTMLElement {
   deleteBtn.addEventListener("click", () => {
     templates.splice(index, 1);
     markDirty();
+    save();
     renderList();
   });
 
@@ -110,14 +112,16 @@ function renderList(): void {
   }
 }
 
-saveBtn.addEventListener("click", save);
-
 addBtn.addEventListener("click", () => {
   templates.push({ name: "", template: "" });
   markDirty();
   renderList();
   const items = listEl.querySelectorAll<HTMLInputElement>(".template-name");
   items[items.length - 1]?.focus();
+});
+
+window.addEventListener("beforeunload", () => {
+  if (dirty) save();
 });
 
 chrome.storage.sync.get({ templates: null }, (data) => {

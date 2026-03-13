@@ -13,11 +13,6 @@
       </div>
 
       <div id="template-list"></div>
-
-      <div class="save-bar">
-        <span id="save-hint" class="save-hint"></span>
-        <button id="save-btn" class="btn btn-success btn-sm" disabled>保存</button>
-      </div>
     </section>
   </div>
 
@@ -27,10 +22,11 @@
         <input type="text" class="template-name" placeholder="テンプレート名">
         <button class="btn btn-danger btn-xs delete-btn">削除</button>
       </div>
-      <textarea class="template-body" rows="5" placeholder="テンプレート本文&#10;{{フィールド名}} で変数を埋め込めます"></textarea>
+      <textarea class="template-body" rows="5" placeholder="テンプレート本文&#10;{{フィールド名}} で変数を設定できます"></textarea>
       <div class="insert-toolbar">
         <button type="button" class="btn btn-outline btn-xs insert-field-btn">+ フィールド</button>
         <button type="button" class="btn btn-outline btn-xs insert-mention-btn">+ メンション</button>
+        <span class="auto-save-status"></span>
       </div>
     </div>
   </template>
