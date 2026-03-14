@@ -16,6 +16,7 @@ const pickerCloseBtn = pickerOverlay.querySelector(".picker-close-btn")!;
 
 let activeTextarea: HTMLTextAreaElement | null = null;
 let debounceSearchTimer: ReturnType<typeof setTimeout>;
+let pickerMode: "field" | "mention" = "mention";
 
 function closePicker(): void {
   pickerOverlay.hidden = true;
@@ -36,49 +37,73 @@ function insertAtCursor(textarea: HTMLTextAreaElement, text: string): void {
   textarea.focus();
 }
 
+let allFields: Array<{ code: string; label: string }> = [];
+
+function renderFieldList(query: string): void {
+  pickerList.innerHTML = "";
+  const q = query.trim().toLowerCase();
+  const filtered = q
+    ? allFields.filter(
+        (f) =>
+          f.label.toLowerCase().includes(q) ||
+          f.code.toLowerCase().includes(q),
+      )
+    : allFields;
+
+  if (filtered.length === 0) {
+    pickerStatus.textContent = "該当するフィールドが見つかりません";
+    return;
+  }
+  pickerStatus.textContent = "";
+  for (const f of filtered) {
+    const item = document.createElement("div");
+    item.className = "picker-list-item";
+    item.textContent = f.label;
+    if (f.label !== f.code) {
+      const sub = document.createElement("span");
+      sub.className = "picker-item-sub";
+      sub.textContent = `(${f.code})`;
+      item.appendChild(sub);
+    }
+    item.addEventListener("click", () => {
+      if (activeTextarea) {
+        insertAtCursor(activeTextarea, `{{${f.label}}}`);
+      }
+      closePicker();
+    });
+    pickerList.appendChild(item);
+  }
+}
+
 export function openFieldPicker(textarea: HTMLTextAreaElement): void {
   activeTextarea = textarea;
+  pickerMode = "field";
   pickerTitle.textContent = "フィールド挿入";
-  pickerSearch.hidden = true;
+  pickerSearch.hidden = false;
+  pickerSearch.value = "";
   pickerList.innerHTML = "";
   pickerStatus.textContent = "読み込み中...";
   pickerOverlay.hidden = false;
+  allFields = [];
 
   chrome.runtime.sendMessage({ action: "getFormFieldDefs" }, (resp) => {
     if (resp?.error) {
       pickerStatus.textContent = resp.error;
       return;
     }
-    const fields: Array<{ code: string; label: string }> =
-      resp?.fields ?? [];
-    if (fields.length === 0) {
+    allFields = resp?.fields ?? [];
+    if (allFields.length === 0) {
       pickerStatus.textContent = "フィールドが見つかりません";
       return;
     }
-    pickerStatus.textContent = "";
-    for (const f of fields) {
-      const item = document.createElement("div");
-      item.className = "picker-list-item";
-      item.textContent = f.label;
-      if (f.label !== f.code) {
-        const sub = document.createElement("span");
-        sub.className = "picker-item-sub";
-        sub.textContent = `(${f.code})`;
-        item.appendChild(sub);
-      }
-      item.addEventListener("click", () => {
-        if (activeTextarea) {
-          insertAtCursor(activeTextarea, `{{${f.label}}}`);
-        }
-        closePicker();
-      });
-      pickerList.appendChild(item);
-    }
+    renderFieldList("");
+    pickerSearch.focus();
   });
 }
 
 export function openMentionPicker(textarea: HTMLTextAreaElement): void {
   activeTextarea = textarea;
+  pickerMode = "mention";
   pickerTitle.textContent = "メンション挿入";
   pickerSearch.hidden = false;
   pickerSearch.value = "";
@@ -154,7 +179,11 @@ document.addEventListener("keydown", (e) => {
 });
 pickerSearch.addEventListener("input", () => {
   clearTimeout(debounceSearchTimer);
-  debounceSearchTimer = setTimeout(() => {
-    doMentionSearch(pickerSearch.value);
-  }, 300);
+  if (pickerMode === "field") {
+    renderFieldList(pickerSearch.value);
+  } else {
+    debounceSearchTimer = setTimeout(() => {
+      doMentionSearch(pickerSearch.value);
+    }, 300);
+  }
 });
