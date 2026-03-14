@@ -129,6 +129,10 @@ addBtn.addEventListener("click", () => {
   items[items.length - 1]?.focus();
 });
 
+document.getElementById("open-options")!.addEventListener("click", () => {
+  chrome.runtime.openOptionsPage();
+});
+
 window.addEventListener("beforeunload", () => {
   if (dirty) save();
 });
