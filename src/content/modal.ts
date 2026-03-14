@@ -11,7 +11,7 @@ const MODAL_ID = "gishi-kintone-modal";
 const emptyHtml = `
   <div class="ktc-modal">
     <div class="ktc-modal-body">
-      <p class="ktc-empty-msg">テンプレートが登録されていません。<br>設定からテンプレートを追加してください。</p>
+      <p class="ktc-empty-msg">テンプレートが登録されていません。<br>拡張機能メニューからテンプレートを追加してください。</p>
       <button class="ktc-btn ktc-btn-normal">設定を開く</button>
     </div>
   </div>

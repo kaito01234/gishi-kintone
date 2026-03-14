@@ -5,15 +5,21 @@
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <div class="popup-body">
-    <section class="templates-section">
-      <div class="section-header">
-        <h2>テンプレート</h2>
-        <button id="add-template" class="btn btn-primary btn-sm">+ 追加</button>
-      </div>
+  <div class="popup-scroll">
+    <div class="popup-body">
+      <section class="templates-section">
+        <div class="section-header">
+          <h2>テンプレート</h2>
+          <button id="add-template" class="btn btn-primary btn-sm">+ 追加</button>
+        </div>
 
-      <div id="template-list"></div>
-    </section>
+        <div id="template-list"></div>
+      </section>
+    </div>
+
+    <footer class="popup-footer">
+      <button id="open-options" class="popup-footer-link">設定を開く</button>
+    </footer>
   </div>
 
   <template id="template-item-tmpl">
