@@ -28,10 +28,16 @@
         <button id="add-template" class="btn btn-primary btn-sm">+ 追加</button>
       </div>
       <p class="template-desc">
-        <code>{{フィールド名}}</code> でフィールドの値を埋め込み<br>
-        <code>{{@ログイン名}}</code> でユーザーへのメンション<br>
-        <code>{{@org/組織コード}}</code> で組織へのメンション<br>
-        <code>{{@group/グループコード}}</code> でグループへのメンション
+        テンプレート本文では <code>{{ }}</code> を使って値やメンションを挿入できます。
+      </p>
+      <ul class="template-desc-list">
+        <li><code>{{フィールド名}}</code> フィールドの値を埋め込み</li>
+        <li><code>{{@ログイン名}}</code> ユーザーへのメンション</li>
+        <li><code>{{@org/組織コード}}</code> 組織へのメンション</li>
+        <li><code>{{@group/グループコード}}</code> グループへのメンション</li>
+      </ul>
+      <p class="template-desc">
+        拡張機能のポップアップではフィールド名やメンション先を選んで設定することができます。
       </p>
       <div id="template-list"></div>
     </section>
