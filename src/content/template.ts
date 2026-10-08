@@ -52,10 +52,9 @@ export function applyTemplateHtml(
   fields: FieldMap,
   resolved: ResolvedMentionMap,
 ): string {
-  const mentionClass =
-    "ocean-ui-plugin-mention-user ocean-ui-plugin-linkbubble-no";
-  const mentionStyle = "-webkit-user-modify: read-only;";
-
+  // 新エディタ(CKEditor)のメンション形式。旧エディタ(ocean-ui)も貼り付け時に
+  // この形式を自前のメンションに変換する。どちらも先頭に "@" を付けて表示するため、
+  // 本文には名前だけを入れる
   const body = template.replace(
     /\{\{(.+?)\}\}/g,
     (match, content: string) => {
@@ -70,13 +69,7 @@ export function applyTemplateHtml(
             : mention.type === "org"
               ? "org-mention-id"
               : "group-mention-id";
-        const href =
-          mention.type === "user"
-            ? mention.code.includes("@")
-              ? `/k/guest/#/people/guest/${encodeURIComponent(mention.code)}`
-              : `/k/#/people/user/${encodeURIComponent(mention.code)}`
-            : "#";
-        return `<a class="${mentionClass}" href="${href}" data-${attr}="${entity.id}" tabindex="-1" style="${mentionStyle}">@<bdi>${escapeHtml(entity.name)}</bdi></a>`;
+        return `<button class="editor-mention" type="button" data-mention-code="${escapeHtml(entity.code)}" data-${attr}="${entity.id}">${escapeHtml(entity.name)}</button>`;
       }
       const value = fields[trimmed];
       return value !== undefined ? escapeHtml(value) : escapeHtml(match);
